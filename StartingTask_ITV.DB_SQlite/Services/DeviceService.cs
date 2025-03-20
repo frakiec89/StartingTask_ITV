@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StartingTask_ITV.Core.Interfaces;
-using StartingTask_ITV.Core.Model;
 
 namespace StartingTask_ITV.DB_SQlite.Services
 {
