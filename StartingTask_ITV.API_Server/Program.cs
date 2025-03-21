@@ -1,13 +1,19 @@
 using StartingTask_ITV.DB_SQlite.Services;
 using StartingTask_ITV.Core.Interfaces;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+var configuration = builder.Configuration;
+
+string fileName = configuration["ConnectionStrings:FileName"]; // сторока  соединени€  дл€  SQliete
+
 //это мой сервис из Ѕƒ
-builder.Services.AddSingleton<IDeviceService, DeviceService>();
+builder.Services.AddSingleton<IDeviceService>(provider =>
+{
+    return new DeviceService($"fileName={fileName}");
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -18,10 +24,11 @@ if (app.Environment.IsDevelopment())
 {
 }
 
-
-app.UseSwagger(); // вынесем  UseSwagger  в релиз  
+app.UseSwagger(); // todo вынесем  UseSwagger  в релиз  
 app.UseSwaggerUI();
 
+
+// мо€ авторизаци€  
 app.UseMiddleware<MyBasicAuthentication>();
 
 app.UseAuthorization();

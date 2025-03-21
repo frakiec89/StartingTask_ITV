@@ -3,11 +3,14 @@ using System.Text;
 
 internal class MyBasicAuthentication
 {
+
+    private readonly IConfiguration _configuration;
     private readonly RequestDelegate _next; 
 
-    public MyBasicAuthentication(RequestDelegate next)
+    public MyBasicAuthentication(RequestDelegate next , IConfiguration configuration)
     {
         _next = next;
+        _configuration = configuration;
     }
 
     public async Task InvokeAsync(HttpContext context)
@@ -49,7 +52,10 @@ internal class MyBasicAuthentication
 
     private bool IsAuthorized(string username, string password)
     {
-        if(username == "admin" && password == "123") // todo Mock авторизация - дописать запрос  в  дб   
+        string _username = _configuration["Authorization:Username"]; // todo Mock авторизация - дописать запрос  в  дб   
+        string _password = _configuration["Authorization:Password"];
+
+        if (username == _username && password == _password) 
             return true;
         else
             return false;

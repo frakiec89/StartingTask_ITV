@@ -5,13 +5,16 @@ namespace StartingTask_ITV.DB_SQlite
 {
     internal class SqliteContextEF : DbContext
     {
-        public SqliteContextEF() : base()
+        private readonly string _cs; // строка соедиения
+
+        public SqliteContextEF(string cs) : base()
         {
+            _cs = cs;
             Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
-            => optionsBuilder.UseSqlite("FileName=Devices.DB"); // todo вынести  в Configuration 
+            => optionsBuilder.UseSqlite(_cs); 
 
         internal DbSet<Device> Devices {  get; set; }
 

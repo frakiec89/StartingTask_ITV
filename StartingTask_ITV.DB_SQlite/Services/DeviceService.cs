@@ -7,9 +7,9 @@ namespace StartingTask_ITV.DB_SQlite.Services
     {
         private SqliteContextEF sqlite;
 
-        public DeviceService()
+        public DeviceService(string cs)
         {
-            sqlite = new SqliteContextEF(); // todo зависимость         
+            sqlite = new SqliteContextEF(cs); // todo зависимость         
         }
 
         public async Task<IEnumerable<Core.Model.Device>> GetDevicesAsync()
