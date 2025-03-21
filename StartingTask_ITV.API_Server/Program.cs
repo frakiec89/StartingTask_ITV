@@ -20,6 +20,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<MyBasicAuthentication>();
+
 app.UseAuthorization();
 
 app.MapControllers();
