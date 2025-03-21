@@ -18,12 +18,24 @@ namespace StartingTask_ITV.DB_SQlite.Services
             return devicesDb.Select(device => device.GetCoreDevice()).ToList();
         }
 
-        public async Task AddDeviceAsync(string type)
+        /// <summary>
+        /// Добавить новое устройство
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
+        public async Task AddDeviceAsync(int id ,  string type)
         {
             if (string.IsNullOrWhiteSpace(type))
                 throw new ArgumentNullException(nameof(type), "тип оборудования не может быть пустым");
 
-            await sqlite.Devices.AddAsync(new Model.Device { Type = type });
+
+            if (await sqlite.Devices.AnyAsync(x=>x.Id ==id))
+                throw new InvalidOperationException("Устройство с таким Id уже существует.");
+
+            await sqlite.Devices.AddAsync(new Model.Device { Id=id ,  Type = type });
             await sqlite.SaveChangesAsync();
         }
 

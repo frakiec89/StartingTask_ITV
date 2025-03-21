@@ -29,16 +29,24 @@ namespace StartingTask_ITV.API_Server.Controllers
             }
         }
 
-        [HttpPost("{type}")]
-        public async Task<IActionResult> AddDevice(string type)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> AddDevice(int id , string type)
         {
             if (string.IsNullOrWhiteSpace(type))
                return  BadRequest("тип устройства не может быть пустым");
 
             try
             {
-                await _deviceService.AddDeviceAsync(type);
+                await _deviceService.AddDeviceAsync(id,  type);
                 return Ok();
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch(InvalidOperationException ex)
+            {
+                return StatusCode(409, ex.Message);
             }
             catch (Exception ex)
             {

@@ -19,10 +19,4 @@
     <ProjectReference Include="..\StartingTask_ITV.Core\StartingTask_ITV.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Devices.DB">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

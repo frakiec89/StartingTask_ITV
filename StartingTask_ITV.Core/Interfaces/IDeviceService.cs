@@ -4,7 +4,16 @@ namespace StartingTask_ITV.Core.Interfaces
 {
     public interface IDeviceService
     {
-        Task AddDeviceAsync(string type);
+
+        /// <summary>
+        /// Добавить новое устройство
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
+        Task AddDeviceAsync(int  id ,  string type);
 
         /// <summary>
         /// Удаление устройсва по id
