@@ -16,9 +16,11 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
+
+
+app.UseSwagger(); // вынесем  UseSwagger  в релиз  
+app.UseSwaggerUI();
 
 app.UseMiddleware<MyBasicAuthentication>();
 

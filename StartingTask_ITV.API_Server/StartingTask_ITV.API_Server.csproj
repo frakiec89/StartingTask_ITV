@@ -15,4 +15,10 @@
     <ProjectReference Include="..\StartingTask_ITV.DB_SQlite\StartingTask_ITV.DB_SQlite.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Devices.DB">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
